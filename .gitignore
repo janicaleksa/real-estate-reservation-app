@@ -23,3 +23,12 @@
 hs_err_pid*
 .project
 .settings/org.eclipse.m2e.core.prefs
+RepositoryLayer/.classpath
+RepositoryLayer/.settings/org.eclipse.core.resources.prefs
+RepositoryLayer/.settings/org.eclipse.jdt.apt.core.prefs
+RepositoryLayer/.settings/org.eclipse.jdt.core.prefs
+RepositoryLayer/.settings/org.eclipse.m2e.core.prefs
+RepositoryLayer/.settings/org.springframework.ide.eclipse.prefs
+RepositoryLayer/target/classes/META-INF/MANIFEST.MF
+RepositoryLayer/target/classes/META-INF/maven/org.springframework.boot/RepositoryLayer/pom.properties
+RepositoryLayer/target/classes/META-INF/maven/org.springframework.boot/RepositoryLayer/pom.xml

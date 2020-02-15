@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <!-- Modul info -->
+  <artifactId>RepositoryLayer</artifactId>
+  <name>Repository Layer</name>
+  <description>Layer with entities and interfaces for accessing external database</description>
+  <packaging>jar</packaging>
+
+  <!-- Parent projects info -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.4.RELEASE</version>
+    <relativePath/>
+  </parent>
+</project>
