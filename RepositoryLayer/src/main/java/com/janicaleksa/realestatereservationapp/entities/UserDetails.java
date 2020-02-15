@@ -2,8 +2,11 @@ package com.janicaleksa.realestatereservationapp.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Embeddable;
+
 import lombok.Data;
 
+@Embeddable
 @Data
 public class UserDetails {
 
@@ -13,4 +16,5 @@ public class UserDetails {
 	private LocalDate dateOfBirth;
 	private String phoneNumber;
 	private Gender gender;
+	private City city;
 }

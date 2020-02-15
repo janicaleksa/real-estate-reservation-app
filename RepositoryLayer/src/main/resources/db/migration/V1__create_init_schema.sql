@@ -1,0 +1,1 @@
+create table advertisement (code  bigserial not null, date date, description text, price numeric(19, 2), address varchar(255), capacity int4, category varchar(255), city varchar(255), name varchar(255), quadrature int4, primary key (code));
