@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <!-- Modul info -->
+  <artifactId>RepositoryLayer</artifactId>
+  <name>Repository Layer</name>
+  <description>Layer with entities and interfaces for accessing external database</description>
+  <packaging>jar</packaging>
+
+  <!-- Parent projects info -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.4.RELEASE</version>
+    <relativePath/>
+  </parent>
+  
+  <!-- Module plugins -->
+  <build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+  </build>
+  
+  <!-- Module dependencies -->
+  <dependencies>
+  
+  	<!-- Spring data JPA -->
+  	<dependency>
+  		<groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-data-jpa</artifactId>
+	    <version>2.2.4.RELEASE</version>
+  	</dependency>
+  	
+  	<!-- Postgresql driver -->
+  	<dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.2.10</version>
+	</dependency>
+  	
+  	<!-- Flyway migration -->
+  	<dependency>
+	    <groupId>org.flywaydb</groupId>
+	    <artifactId>flyway-core</artifactId>
+	    <version>6.2.3</version>
+	</dependency>
+	
+	<!-- Lombok -->
+	<dependency>
+	    <groupId>org.projectlombok</groupId>
+	    <artifactId>lombok</artifactId>
+	    <version>1.18.12</version>
+	    <scope>provided</scope>
+	    <optional>true</optional>
+	</dependency>
+	
+  </dependencies>
+</project>
