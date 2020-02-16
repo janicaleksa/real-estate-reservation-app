@@ -1,5 +1,6 @@
 package com.janicaleksa.realestatereservationapp.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +11,7 @@ import lombok.Data;
 @Data
 public class RealEstate {
 
+	@Column(name = "real_estate_name")
 	private String name;
 	private String address;
 	private Integer quadrature;
