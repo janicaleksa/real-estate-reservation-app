@@ -6,12 +6,9 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -30,7 +27,4 @@ public class Advertisement {
 	private BigDecimal price;
 	@Embedded
 	private RealEstate realEstate;
-	@ManyToOne
-	@JoinColumn(name = "owner_username", foreignKey = @ForeignKey(name = "user_account_fk"))
-	private UserAccount owner;
 }
