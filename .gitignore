@@ -40,3 +40,24 @@ RepositoryLayer/target/classes/META-INF/maven/org.springframework.boot/Repositor
 =======
 RepositoryLayer/.factorypath
 >>>>>>> d30969272b9bd836a028062f11d4c6f5b2428e92
+ControllerLayer/.classpath
+ControllerLayer/.settings/org.eclipse.jdt.apt.core.prefs
+ControllerLayer/.settings/org.eclipse.jdt.core.prefs
+ControllerLayer/.settings/org.eclipse.m2e.core.prefs
+ControllerLayer/target/classes/META-INF/MANIFEST.MF
+ControllerLayer/target/classes/META-INF/maven/com.janicaleksa/ControllerLayer/pom.properties
+ControllerLayer/target/classes/META-INF/maven/com.janicaleksa/ControllerLayer/pom.xml
+FacadeLayer/.classpath
+FacadeLayer/.settings/org.eclipse.jdt.apt.core.prefs
+FacadeLayer/.settings/org.eclipse.jdt.core.prefs
+FacadeLayer/.settings/org.eclipse.m2e.core.prefs
+FacadeLayer/target/classes/META-INF/MANIFEST.MF
+FacadeLayer/target/classes/META-INF/maven/com.janicaleksa/FacadeLayer/pom.properties
+FacadeLayer/target/classes/META-INF/maven/com.janicaleksa/FacadeLayer/pom.xml
+ServiceLayer/.classpath
+ServiceLayer/.settings/org.eclipse.jdt.apt.core.prefs
+ServiceLayer/.settings/org.eclipse.jdt.core.prefs
+ServiceLayer/.settings/org.eclipse.m2e.core.prefs
+ServiceLayer/target/classes/META-INF/MANIFEST.MF
+ServiceLayer/target/classes/META-INF/maven/com.janicaleksa/ServiceLayer/pom.properties
+ServiceLayer/target/classes/META-INF/maven/com.janicaleksa/ServiceLayer/pom.xml
