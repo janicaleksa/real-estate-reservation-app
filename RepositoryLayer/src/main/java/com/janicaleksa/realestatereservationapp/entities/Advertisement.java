@@ -20,6 +20,7 @@ public class Advertisement {
 	@Column(columnDefinition = "bigserial")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long code;
+	@Column(name = "advertisement_date")
 	private LocalDate date;
 	@Column(columnDefinition = "text")
 	private String description;
