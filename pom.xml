@@ -12,5 +12,8 @@
   <!-- App modules -->
   <modules>
   	<module>RepositoryLayer</module>
+  	<module>ServiceLayer</module>
+  	<module>FacadeLayer</module>
+  	<module>ControllerLayer</module>
   </modules>
 </project>
