@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data 
-public class UserRegistrationForm {
+public class UserForm {
 
 	private String username;
 	private String password;
