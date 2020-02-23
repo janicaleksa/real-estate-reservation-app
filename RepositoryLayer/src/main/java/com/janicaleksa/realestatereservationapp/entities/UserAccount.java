@@ -7,10 +7,14 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Data 
 public class UserAccount {
 	
 	@Id
