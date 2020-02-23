@@ -1,6 +1,8 @@
 package com.janicaleksa.realestatereservationapp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.janicaleksa.realestatereservationapp.constants.Constants;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
+import com.janicaleksa.realestatereservationapp.dto.UserDeactivateForm;
 import com.janicaleksa.realestatereservationapp.dto.UserLoginForm;
 import com.janicaleksa.realestatereservationapp.dto.UserForm;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
@@ -35,6 +38,11 @@ public class UserController {
 	@PutMapping(value = Constants.API.User.UPDATE_URL)
 	public void updateUser(@RequestBody UserForm userForm) {
 		userFacade.updateUser(userForm);
+	}
+	
+	@DeleteMapping(value = Constants.API.User.DELETE_URL)
+	public void deactivateUser(@RequestBody UserDeactivateForm userDeactivateForm) {
+		userFacade.deactivateUser(userDeactivateForm);
 	}
 	
 	public UserFacade getUserFacade() {

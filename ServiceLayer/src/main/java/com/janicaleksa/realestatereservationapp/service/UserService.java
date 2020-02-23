@@ -7,4 +7,6 @@ public interface UserService {
 	void saveUser(User user);
 	
 	User loginUser(User user);
+	
+	void deleteUser(User user);
 }
