@@ -61,3 +61,11 @@ ServiceLayer/.settings/org.eclipse.m2e.core.prefs
 ServiceLayer/target/classes/META-INF/MANIFEST.MF
 ServiceLayer/target/classes/META-INF/maven/com.janicaleksa/ServiceLayer/pom.properties
 ServiceLayer/target/classes/META-INF/maven/com.janicaleksa/ServiceLayer/pom.xml
+ControllerLayer/.settings/org.eclipse.core.resources.prefs
+ControllerLayer/.settings/org.springframework.ide.eclipse.prefs
+ControllerLayer/target/classes/META-INF/maven/org.springframework.boot/ControllerLayer/pom.properties
+FacadeLayer/.factorypath
+FacadeLayer/.settings/org.springframework.ide.eclipse.prefs
+RepositoryLayer/target/classes/META-INF/maven/com.janicaleksa/RepositoryLayer/pom.properties
+ServiceLayer/.factorypath
+ServiceLayer/.settings/org.springframework.ide.eclipse.prefs
