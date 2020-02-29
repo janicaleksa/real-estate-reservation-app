@@ -10,5 +10,6 @@ import com.janicaleksa.realestatereservationapp.entities.UserAccount;
 @Repository
 public interface UserRepository extends JpaRepository<UserAccount, String> {
 
-	Optional<UserAccount> findByUsernameAndPassword(String username, String password);
+	Optional<UserAccount> findByUsername(String username);
+	
 }
