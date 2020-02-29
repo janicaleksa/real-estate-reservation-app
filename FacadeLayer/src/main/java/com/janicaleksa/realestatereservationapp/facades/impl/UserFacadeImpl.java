@@ -42,7 +42,7 @@ public class UserFacadeImpl implements UserFacade{
 		
 		user.setUserDetails(userDetails);
 		
-		userService.saveUser(user);
+		getUserService().saveUser(user);
 	}
 	
 	public UserDTO loginUser(AuthenticationRequest userLoginForm) {
@@ -50,7 +50,7 @@ public class UserFacadeImpl implements UserFacade{
 		user.setUsername(userLoginForm.getUsername());
 		user.setPassword(userLoginForm.getPassword());
 			
-		User newUser = userService.loginUser(user);
+		User newUser = getUserService().loginUser(user);
 	
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUsername(newUser.getUsername());
@@ -85,14 +85,14 @@ public class UserFacadeImpl implements UserFacade{
 		
 		user.setUserDetails(userDetails);
 		
-		userService.saveUser(user);
+		getUserService().saveUser(user);
 	}
 	
 	public void deactivateUser(UserDeactivateForm userDeactivateForm) {
 		User user = new User();
 		
 		user.setUsername(userDeactivateForm.getUsername());
-		userService.deleteUser(user);
+		getUserService().deleteUser(user);
 	}
 	
 	public JWTToken authenticateUser(AuthenticationRequest authenticationRequest) {
@@ -105,7 +105,8 @@ public class UserFacadeImpl implements UserFacade{
 		return new JWTToken("generatedToken");
 	}
 	
-	public UserService getUserService() {
+
+	private UserService getUserService() {
 		return userService;
 	}
 
