@@ -29,9 +29,12 @@ public class UserServiceImpl implements UserService {
 		User newUser = new User(userAccount.get());
 		return newUser;
 	}
+	
+	public void deleteUser(User user) {
+		userRepository.delete(user.getUserAccount());
+	}
 
 	private UserRepository getUserRepository() {
 		return userRepository;
 	}
-
 }

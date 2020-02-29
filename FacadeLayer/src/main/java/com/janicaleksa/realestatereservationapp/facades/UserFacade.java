@@ -1,6 +1,7 @@
 package com.janicaleksa.realestatereservationapp.facades;
 
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
+import com.janicaleksa.realestatereservationapp.dto.UserDeactivateForm;
 import com.janicaleksa.realestatereservationapp.dto.UserLoginForm;
 import com.janicaleksa.realestatereservationapp.dto.UserForm;
 
@@ -11,4 +12,6 @@ public interface UserFacade {
 	UserDTO loginUser(UserLoginForm userLoginForm);
 	
 	void updateUser(UserForm userForm);
+	
+	void deactivateUser(UserDeactivateForm userDeactivateForm);
 }

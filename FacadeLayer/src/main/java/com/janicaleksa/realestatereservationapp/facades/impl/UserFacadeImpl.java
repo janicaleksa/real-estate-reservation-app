@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.janicaleksa.realestatereservationapp.domain.User;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
+import com.janicaleksa.realestatereservationapp.dto.UserDeactivateForm;
 import com.janicaleksa.realestatereservationapp.dto.UserLoginForm;
 import com.janicaleksa.realestatereservationapp.dto.UserForm;
 import com.janicaleksa.realestatereservationapp.entities.UserAccount;
@@ -93,8 +94,16 @@ public class UserFacadeImpl implements UserFacade{
 		userService.saveUser(user);
 	}
 	
+	public void deactivateUser(UserDeactivateForm userDeactivateForm) {
+		User user = new User();
+		UserAccount userAccount = new UserAccount();
+		
+		userAccount.setUsername(userDeactivateForm.getUsername());
+		user.setUserAccount(userAccount);
+		userService.deleteUser(user);
+	}
+	
 	public UserService getUserService() {
 		return userService;
 	}
-	
 }
