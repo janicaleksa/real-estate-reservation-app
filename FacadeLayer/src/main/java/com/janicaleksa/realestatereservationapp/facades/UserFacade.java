@@ -3,7 +3,7 @@ package com.janicaleksa.realestatereservationapp.facades;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserDeactivateForm;
 import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequest;
-import com.janicaleksa.realestatereservationapp.dto.JWTToken;
+import com.janicaleksa.realestatereservationapp.dto.JWTTokenDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserForm;
 
 public interface UserFacade {
@@ -16,5 +16,5 @@ public interface UserFacade {
 	
 	void deactivateUser(UserDeactivateForm userDeactivateForm);
 
-	JWTToken authenticateUser(AuthenticationRequest authenticationRequest);
+	JWTTokenDTO authenticateUser(AuthenticationRequest authenticationRequest);
 }

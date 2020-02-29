@@ -1,6 +1,6 @@
 package com.janicaleksa.realestatereservationapp.constants;
 
-public interface Constants {
+public interface ControllerLayerConstants {
 	
 	interface API {
 		

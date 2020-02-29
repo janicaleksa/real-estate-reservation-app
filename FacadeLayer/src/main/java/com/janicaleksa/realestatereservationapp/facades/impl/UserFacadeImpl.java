@@ -1,27 +1,33 @@
 package com.janicaleksa.realestatereservationapp.facades.impl;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.janicaleksa.realestatereservationapp.constants.ServiceLayerConstants;
+import com.janicaleksa.realestatereservationapp.domain.JWTToken;
 import com.janicaleksa.realestatereservationapp.domain.User;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserDeactivateForm;
 import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequest;
-import com.janicaleksa.realestatereservationapp.dto.JWTToken;
+import com.janicaleksa.realestatereservationapp.dto.JWTTokenDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserForm;
-import com.janicaleksa.realestatereservationapp.entities.UserAccount;
 import com.janicaleksa.realestatereservationapp.entities.UserDetails;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
+import com.janicaleksa.realestatereservationapp.service.JWTService;
 import com.janicaleksa.realestatereservationapp.service.UserService;
 
 @Component
 public class UserFacadeImpl implements UserFacade{
 
 	private final UserService userService;
+	private final JWTService jwtService;
 	
 	@Autowired
-	public UserFacadeImpl(UserService userService) {
+	public UserFacadeImpl(UserService userService, JWTService jwtService) {
 		this.userService = userService;
+		this.jwtService = jwtService;
 	}
 	
 	public void registerUser(UserForm userForm) {
@@ -43,6 +49,20 @@ public class UserFacadeImpl implements UserFacade{
 		user.setUserDetails(userDetails);
 		
 		getUserService().saveUser(user);
+	}
+	
+	public JWTTokenDTO authenticateUser(AuthenticationRequest authenticationRequest) {
+		User user = new User();
+		user.setPassword(authenticationRequest.getPassword());
+		user.setUsername(authenticationRequest.getUsername());
+		
+		getUserService().authenticateUser(user);
+		User authenticatedUser = getUserService().loadUserByUsername(user);
+		
+		JWTToken jwtToken = new JWTToken(authenticatedUser, LocalDateTime.now(), LocalDateTime.now().plusHours(ServiceLayerConstants.JWTToken.EXPIRING_HOURS));
+		String token = getJwtService().generateToken(jwtToken);
+		
+		return new JWTTokenDTO(token);
 	}
 	
 	public UserDTO loginUser(AuthenticationRequest userLoginForm) {
@@ -94,20 +114,13 @@ public class UserFacadeImpl implements UserFacade{
 		user.setUsername(userDeactivateForm.getUsername());
 		getUserService().deleteUser(user);
 	}
-	
-	public JWTToken authenticateUser(AuthenticationRequest authenticationRequest) {
-		User user = new User();
-		user.setPassword(authenticationRequest.getPassword());
-		user.setUsername(authenticationRequest.getUsername());
-		
-		getUserService().authenticateUser(user);
-		User authenticatedUser = getUserService().loadUserByUsername(user);
-		return new JWTToken("generatedToken");
-	}
-	
 
 	private UserService getUserService() {
 		return userService;
+	}
+
+	public JWTService getJwtService() {
+		return jwtService;
 	}
 
 }

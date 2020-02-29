@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data 
-public class JWTToken {
+public class JWTTokenDTO {
 
 	private String token;
 }

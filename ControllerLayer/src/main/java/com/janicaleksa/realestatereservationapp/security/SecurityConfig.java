@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.janicaleksa.realestatereservationapp.constants.Constants;
+import com.janicaleksa.realestatereservationapp.constants.ControllerLayerConstants;
 import com.janicaleksa.realestatereservationapp.service.UserSecurityService;
 
 @EnableWebSecurity
@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-			.authorizeRequests().antMatchers(Constants.API.User.AUTHENTICATE_URL).permitAll()
+			.authorizeRequests().antMatchers(ControllerLayerConstants.API.User.AUTHENTICATE_URL).permitAll()
 			.anyRequest().authenticated();
 	} 
 	
