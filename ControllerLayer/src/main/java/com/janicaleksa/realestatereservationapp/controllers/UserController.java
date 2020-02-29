@@ -22,12 +22,10 @@ import com.janicaleksa.realestatereservationapp.service.UserService;
 public class UserController {
 
 	private final UserFacade userFacade;
-	private final UserService userService;
 	
 	@Autowired
-	public UserController(UserFacade userFacade, UserService userService) {
+	public UserController(UserFacade userFacade) {
 		this.userFacade = userFacade;
-		this.userService = userService;
 	}
 	
 	@PostMapping(value = Constants.API.User.REGISTRATION_URL)
@@ -57,9 +55,5 @@ public class UserController {
 	
 	public UserFacade getUserFacade() {
 		return userFacade;
-	}
-
-	public UserService getUserService() {
-		return userService;
 	}
 }

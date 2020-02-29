@@ -96,8 +96,12 @@ public class UserFacadeImpl implements UserFacade{
 	}
 	
 	public JWTToken authenticateUser(AuthenticationRequest authenticationRequest) {
-		getUserService().authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-		User user = (User) getUserService().loadUserByUsername(authenticationRequest.getUsername());
+		User user = new User();
+		user.setPassword(authenticationRequest.getPassword());
+		user.setUsername(authenticationRequest.getUsername());
+		
+		getUserService().authenticateUser(user);
+		User authenticatedUser = getUserService().loadUserByUsername(user);
 		return new JWTToken("generatedToken");
 	}
 	

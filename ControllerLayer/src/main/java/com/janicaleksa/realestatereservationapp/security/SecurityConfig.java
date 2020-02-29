@@ -10,21 +10,21 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.janicaleksa.realestatereservationapp.constants.Constants;
-import com.janicaleksa.realestatereservationapp.service.UserService;
+import com.janicaleksa.realestatereservationapp.service.UserSecurityService;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private final UserService userService;
+	private final UserSecurityService userSecurityService;
 
 	@Autowired
-	public SecurityConfig(UserService userService) {
-		this.userService = userService;
+	public SecurityConfig(UserSecurityService userSecurityService) {
+		this.userSecurityService = userSecurityService;
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(getUserService());
+		auth.userDetailsService(getUserSecurityService());
 	}
 	
 	@Override
@@ -34,12 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated();
 	} 
 	
+	@SuppressWarnings("deprecation")
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
 	
-	public UserService getUserService() {
-		return userService;
+	public UserSecurityService getUserSecurityService() {
+		return userSecurityService;
 	}
 }
