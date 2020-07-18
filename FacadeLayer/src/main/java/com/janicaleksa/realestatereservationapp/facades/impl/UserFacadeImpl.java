@@ -1,7 +1,5 @@
 package com.janicaleksa.realestatereservationapp.facades.impl;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,12 +7,12 @@ import com.janicaleksa.realestatereservationapp.constants.ServiceLayerConstants;
 import com.janicaleksa.realestatereservationapp.domain.JWTToken;
 import com.janicaleksa.realestatereservationapp.domain.User;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
-import com.janicaleksa.realestatereservationapp.dto.UserDeactivateForm;
-import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequest;
-import com.janicaleksa.realestatereservationapp.dto.JWTTokenDTO;
-import com.janicaleksa.realestatereservationapp.dto.UserForm;
-import com.janicaleksa.realestatereservationapp.entities.UserDetails;
+import com.janicaleksa.realestatereservationapp.dto.UserDeactivateFormDTO;
+import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequestDTO;
+import com.janicaleksa.realestatereservationapp.dto.AuthenticationResponseDTO;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
+import com.janicaleksa.realestatereservationapp.mappers.AuthenticationRequestMapper;
+import com.janicaleksa.realestatereservationapp.mappers.UserMapper;
 import com.janicaleksa.realestatereservationapp.service.JWTService;
 import com.janicaleksa.realestatereservationapp.service.UserService;
 
@@ -30,85 +28,27 @@ public class UserFacadeImpl implements UserFacade{
 		this.jwtService = jwtService;
 	}
 	
-	public void registerUser(UserForm userForm) {
-		User user = new User();
-		
-		user.setUsername(userForm.getUsername());
-		user.setPassword(userForm.getPassword());
-		user.setRole(userForm.getRole());
-		
-		UserDetails userDetails = new UserDetails();
-		userDetails.setFirstName(userForm.getFirstName());
-		userDetails.setLastName(userForm.getLastName());
-		userDetails.setEmail(userForm.getEmail());
-		userDetails.setDateOfBirth(userForm.getDateOfBirth());
-		userDetails.setPhoneNumber(userForm.getPhoneNumber());
-		userDetails.setGender(userForm.getGender());
-		userDetails.setCity(userForm.getCity());
-		
-		user.setUserDetails(userDetails);
-		
-		getUserService().saveUser(user);
+	public void registerUser(UserDTO userDTO) {
+		getUserService().saveUser(UserMapper.INSTANCE.userDTOToUser(userDTO));
 	}
 	
-	public JWTTokenDTO authenticateUser(AuthenticationRequest authenticationRequest) {
-		User user = new User();
-		user.setPassword(authenticationRequest.getPassword());
-		user.setUsername(authenticationRequest.getUsername());
-		
+	public AuthenticationResponseDTO authenticateUser(AuthenticationRequestDTO authenticationRequest) {
+		User user = AuthenticationRequestMapper.INSTANCE.authenticationRequestDTOToUser(authenticationRequest);
 		getUserService().authenticateUser(user);
-		User authenticatedUser = getUserService().loadUserByUsername(user);
-		
-		JWTToken jwtToken = new JWTToken(authenticatedUser, LocalDateTime.now(), LocalDateTime.now().plusHours(ServiceLayerConstants.JWTToken.EXPIRING_HOURS));
-		String token = getJwtService().generateToken(jwtToken);
-		
-		return new JWTTokenDTO(token);
+		return new AuthenticationResponseDTO(getJwtService().generateToken(new JWTToken(getUserService().loadUserByUsername(user.getUsername()), 
+				ServiceLayerConstants.JWTToken.CURRENT_DATE_TIME, ServiceLayerConstants.JWTToken.CURRENT_DATE_TIME.plusHours(ServiceLayerConstants.JWTToken.EXPIRING_HOURS))));
 	}
 	
-	public UserDTO loginUser(AuthenticationRequest userLoginForm) {
-		User user = new User();	
-		user.setUsername(userLoginForm.getUsername());
-		user.setPassword(userLoginForm.getPassword());
-			
-		User newUser = getUserService().loginUser(user);
-	
-		UserDTO userDTO = new UserDTO();
-		userDTO.setUsername(newUser.getUsername());
-		userDTO.setPassword(newUser.getPassword());
-		userDTO.setRole(newUser.getRole());
-		userDTO.setFirstName(newUser.getUserDetails().getFirstName());
-		userDTO.setLastName(newUser.getUserDetails().getLastName());
-		userDTO.setEmail(newUser.getUserDetails().getEmail());
-		userDTO.setDateOfBirth(newUser.getUserDetails().getDateOfBirth());
-		userDTO.setPhoneNumber(newUser.getUserDetails().getPhoneNumber());
-		userDTO.setGender(newUser.getUserDetails().getGender());
-		userDTO.setCity(newUser.getUserDetails().getCity());
-		
-		return userDTO;
+	public UserDTO loginUser(AuthenticationRequestDTO authenticationRequestDTO) {
+		User newUser = getUserService().loginUser(AuthenticationRequestMapper.INSTANCE.authenticationRequestDTOToUser(authenticationRequestDTO));
+		return UserMapper.INSTANCE.userToUserDTO(newUser);
 	}
 	
-	public void updateUser(UserForm userForm) {
-		User user = new User();
-		
-		user.setUsername(userForm.getUsername());
-		user.setPassword(userForm.getPassword());
-		user.setRole(userForm.getRole());
-		
-		UserDetails userDetails = new UserDetails();
-		userDetails.setFirstName(userForm.getFirstName());
-		userDetails.setLastName(userForm.getLastName());
-		userDetails.setEmail(userForm.getEmail());
-		userDetails.setDateOfBirth(userForm.getDateOfBirth());
-		userDetails.setPhoneNumber(userForm.getPhoneNumber());
-		userDetails.setGender(userForm.getGender());
-		userDetails.setCity(userForm.getCity());
-		
-		user.setUserDetails(userDetails);
-		
-		getUserService().saveUser(user);
+	public void updateUser(UserDTO userDTO) {
+		getUserService().saveUser(UserMapper.INSTANCE.userDTOToUser(userDTO));
 	}
 	
-	public void deactivateUser(UserDeactivateForm userDeactivateForm) {
+	public void deactivateUser(UserDeactivateFormDTO userDeactivateForm) {
 		User user = new User();
 		
 		user.setUsername(userDeactivateForm.getUsername());

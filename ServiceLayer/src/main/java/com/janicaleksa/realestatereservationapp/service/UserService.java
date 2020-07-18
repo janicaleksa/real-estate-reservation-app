@@ -8,7 +8,7 @@ public interface UserService {
 	
 	void authenticateUser(User user);
 	
-	User loadUserByUsername(User user);
+	User loadUserByUsername(String username);
 	
 	User loginUser(User user);
 	

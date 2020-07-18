@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Data 
 public class UserDTO {
 
 	private String username;

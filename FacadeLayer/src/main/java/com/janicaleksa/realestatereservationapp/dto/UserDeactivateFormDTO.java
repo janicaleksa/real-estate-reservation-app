@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data 
-public class JWTTokenDTO {
+public class UserDeactivateFormDTO {
 
-	private String token;
+	private String username;
 }

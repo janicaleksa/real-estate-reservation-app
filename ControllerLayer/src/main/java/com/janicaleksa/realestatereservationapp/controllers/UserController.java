@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.janicaleksa.realestatereservationapp.constants.ControllerLayerConstants;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
-import com.janicaleksa.realestatereservationapp.dto.UserDeactivateForm;
-import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequest;
-import com.janicaleksa.realestatereservationapp.dto.UserForm;
+import com.janicaleksa.realestatereservationapp.dto.UserDeactivateFormDTO;
+import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequestDTO;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
 
 @RestController
@@ -26,27 +25,27 @@ public class UserController {
 	}
 	
 	@PostMapping(value = ControllerLayerConstants.API.User.REGISTRATION_URL)
-	public void registerUser(@RequestBody UserForm userForm) {
-		getUserFacade().registerUser(userForm);
+	public void registerUser(@RequestBody UserDTO userDTO) {
+		getUserFacade().registerUser(userDTO);
 	}
 	
 	@PostMapping(value = ControllerLayerConstants.API.User.AUTHENTICATE_URL)
-	public ResponseEntity<?> authenticateUser(@RequestBody AuthenticationRequest authenticationRequest) {
+	public ResponseEntity<?> authenticateUser(@RequestBody AuthenticationRequestDTO authenticationRequest) {
 		return ResponseEntity.ok(getUserFacade().authenticateUser(authenticationRequest));
 	}
 	
 	@PostMapping(value = ControllerLayerConstants.API.User.LOGIN_URL)
-	public UserDTO loginUser(@RequestBody AuthenticationRequest loginRequest) {
-		return getUserFacade().loginUser(loginRequest);
+	public ResponseEntity<?> loginUser(@RequestBody AuthenticationRequestDTO loginRequest) {
+		return ResponseEntity.ok(getUserFacade().loginUser(loginRequest));
 	}
 	
 	@PutMapping(value = ControllerLayerConstants.API.User.UPDATE_URL)
-	public void updateUser(@RequestBody UserForm userForm) {
+	public void updateUser(@RequestBody UserDTO userForm) {
 		getUserFacade().updateUser(userForm);
 	}
 	
 	@DeleteMapping(value = ControllerLayerConstants.API.User.DELETE_URL)
-	public void deactivateUser(@RequestBody UserDeactivateForm userDeactivateForm) {
+	public void deactivateUser(@RequestBody UserDeactivateFormDTO userDeactivateForm) {
 		getUserFacade().deactivateUser(userDeactivateForm);
 	}
 	
