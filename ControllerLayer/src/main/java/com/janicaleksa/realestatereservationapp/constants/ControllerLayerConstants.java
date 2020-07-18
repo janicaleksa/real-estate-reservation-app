@@ -18,5 +18,10 @@ public interface ControllerLayerConstants {
 		}
 	}
 	
+	interface JWTToken {
+		
+		static final String AuthorizationHeader = "Authorization";
+	}
+	
 	
 }

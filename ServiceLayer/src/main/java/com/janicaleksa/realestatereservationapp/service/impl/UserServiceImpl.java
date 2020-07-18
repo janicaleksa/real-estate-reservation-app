@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
 		getUserSecurityService().authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 	}
 	
-	public User loadUserByUsername(User user) {
-		return (User) getUserSecurityService().loadUserByUsername(user.getUsername());
+	public User loadUserByUsername(String username) {
+		return (User) getUserSecurityService().loadUserByUsername(username);
 	}
 	
 	public User loginUser(User user) {

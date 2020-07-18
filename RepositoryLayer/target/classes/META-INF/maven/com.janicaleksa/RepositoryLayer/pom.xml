@@ -14,6 +14,16 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   
+  <!-- Module properties -->
+  <properties>
+
+	<!-- Java properties -->
+	<java.version>1.8</java.version>
+
+	<m2e.apt.activation>jdt_apt</m2e.apt.activation>
+	
+  </properties>
+  
   <!-- Module dependencies -->
   <dependencies>
   
@@ -48,4 +58,5 @@
 	</dependency>
 	
   </dependencies>
+  
 </project>

@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data 
-public class UserDeactivateForm {
+public class AuthenticationRequestDTO {
 
 	private String username;
+	private String password;
+	
 }
