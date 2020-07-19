@@ -6,7 +6,7 @@ import com.janicaleksa.realestatereservationapp.entities.Advertisement;
 
 public interface AdvertisementService {
 
-	Advertisement findByCode(Long code);
+	Advertisement findAdvertisementByCode(Long code);
 
 	Collection<Advertisement> findAll();
 
@@ -14,6 +14,6 @@ public interface AdvertisementService {
 
 	void updateAdvertisement(Advertisement advertisement);
 
-	void deleteAdvertisement(Long code);
+	void deleteAdvertisementByCode(Long code);
 
 }

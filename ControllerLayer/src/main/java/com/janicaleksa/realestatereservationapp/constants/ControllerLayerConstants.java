@@ -23,9 +23,20 @@ public interface ControllerLayerConstants {
 			
 			static final String GET_SINGLE = API_URL + ADVERTISEMENT_URL + "/{code}";
 			static final String GET_ALL = API_URL + ADVERTISEMENT_URL;
-			static final String CREATE_URL = API_URL + ADVERTISEMENT_URL + "/create";
+			static final String CREATE_URL = API_URL + ADVERTISEMENT_URL;
 			static final String UPDATE_URL = API_URL + ADVERTISEMENT_URL + "/{code}";
 			static final String DELETE_URL = API_URL + ADVERTISEMENT_URL + "/{code}";
+		}
+		
+		interface Reservation {
+			
+			static final String ADVERTISEMENT_URL = "/reservation";
+			
+			static final String GET_SINGLE = API_URL + ADVERTISEMENT_URL + "/{id}";
+			static final String GET_ALL = API_URL + ADVERTISEMENT_URL;
+			static final String CREATE_URL = API_URL + ADVERTISEMENT_URL;
+			static final String UPDATE_URL = API_URL + ADVERTISEMENT_URL + "/{id}";
+			static final String DELETE_URL = API_URL + ADVERTISEMENT_URL + "/{id}";
 		}
 	}
 	
