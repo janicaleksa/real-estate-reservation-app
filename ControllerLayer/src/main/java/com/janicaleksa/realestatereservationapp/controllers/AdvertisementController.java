@@ -26,7 +26,6 @@ public class AdvertisementController {
 	
 	@GetMapping(value = ControllerLayerConstants.API.Advertisement.GET_SINGLE)
 	public ResponseEntity<?> getAdvertisementByCode(@PathVariable Long code) {
-
 		return ResponseEntity.ok(getAdvertisementFacade().findAdvertisementByCode(code));
 	}
 	

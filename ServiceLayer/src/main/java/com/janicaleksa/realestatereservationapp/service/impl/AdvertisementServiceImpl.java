@@ -20,7 +20,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	}
 
 	@Override
-	public Advertisement findByCode(Long code) {
+	public Advertisement findAdvertisementByCode(Long code) {
 		return getAdvertisementRepository().findByCode(code).get();
 	}
 
@@ -41,7 +41,7 @@ public class AdvertisementServiceImpl implements AdvertisementService {
 	}
 
 	@Override
-	public void deleteAdvertisement(Long code) {
+	public void deleteAdvertisementByCode(Long code) {
 		getAdvertisementRepository().deleteById(code);
 	}
 

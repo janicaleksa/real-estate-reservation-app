@@ -23,7 +23,7 @@ public class AdvertisementFacadeImpl implements AdvertisementFacade {
 
 	@Override
 	public AdvertisementDTO findAdvertisementByCode(Long code) {
-		return AdvertisementMapper.INSTANCE.advertisementToAdvertisementDTO(getAdvertisementService().findByCode(code));
+		return AdvertisementMapper.INSTANCE.advertisementToAdvertisementDTO(getAdvertisementService().findAdvertisementByCode(code));
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class AdvertisementFacadeImpl implements AdvertisementFacade {
 
 	@Override
 	public void deleteAdvertisementByCode(Long code) {
-		getAdvertisementService().deleteAdvertisement(code);
+		getAdvertisementService().deleteAdvertisementByCode(code);
 	}
 
 	private AdvertisementService getAdvertisementService() {
