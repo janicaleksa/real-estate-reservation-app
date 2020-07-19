@@ -16,6 +16,17 @@ public interface ControllerLayerConstants {
 			static final String UPDATE_URL = API_URL + USER_URL + "/{username}";
 			static final String DELETE_URL = API_URL + USER_URL + "/{username}";
 		}
+		
+		interface Advertisement {
+			
+			static final String ADVERTISEMENT_URL = "/advertisement";
+			
+			static final String GET_SINGLE = API_URL + ADVERTISEMENT_URL + "/{code}";
+			static final String GET_ALL = API_URL + ADVERTISEMENT_URL;
+			static final String CREATE_URL = API_URL + ADVERTISEMENT_URL + "/create";
+			static final String UPDATE_URL = API_URL + ADVERTISEMENT_URL + "/{code}";
+			static final String DELETE_URL = API_URL + ADVERTISEMENT_URL + "/{code}";
+		}
 	}
 	
 	interface JWTToken {
