@@ -47,8 +47,6 @@ public class UserServiceImpl implements UserService {
 
 	private UserSecurityService getUserSecurityService() {
 		return userSecurityService;
-	}
-
+	}	
 	
-
 }
