@@ -1,5 +1,6 @@
 package com.janicaleksa.realestatereservationapp.mappers;
 
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,4 +14,6 @@ public interface UserAccountMapper {
 	
 	User userAccountToUser(UserAccount userAccount);
 	
+	@InheritInverseConfiguration
+	UserAccount userToUserAccount(User user);
 }

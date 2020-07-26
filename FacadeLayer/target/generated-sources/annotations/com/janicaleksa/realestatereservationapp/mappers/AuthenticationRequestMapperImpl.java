@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-07-19T17:22:04+0200",
+    date = "2020-07-26T14:20:04+0200",
     comments = "version: 1.4.0.Beta2, compiler: Eclipse JDT (IDE) 3.20.0.v20191203-2131, environment: Java 1.8.0_212 (Oracle Corporation)"
 )
 public class AuthenticationRequestMapperImpl implements AuthenticationRequestMapper {
