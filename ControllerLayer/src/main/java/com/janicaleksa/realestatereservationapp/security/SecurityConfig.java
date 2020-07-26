@@ -35,7 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-			.authorizeRequests().antMatchers(ControllerLayerConstants.API.User.AUTHENTICATE_URL).permitAll()
+			.authorizeRequests()
+				.antMatchers(ControllerLayerConstants.API.User.AUTHENTICATE_URL).permitAll()
+				.antMatchers(ControllerLayerConstants.API.User.REGISTRATION_URL).permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

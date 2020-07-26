@@ -5,6 +5,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 
 import com.janicaleksa.realestatereservationapp.domain.User;
+import com.janicaleksa.realestatereservationapp.mappers.UserAccountMapper;
+import com.janicaleksa.realestatereservationapp.entities.UserAccount;
 import com.janicaleksa.realestatereservationapp.repositories.UserRepository;
 import com.janicaleksa.realestatereservationapp.service.UserSecurityService;
 import com.janicaleksa.realestatereservationapp.service.UserService;
@@ -22,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public void saveUser(User user) {
-		getUserRepository().save(user);
+		getUserRepository().save(UserAccountMapper.INSTANCE.userToUserAccount(user));
 	}
 	
 	public void authenticateUser(User user) {
