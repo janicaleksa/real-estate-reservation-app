@@ -2,6 +2,7 @@ package com.janicaleksa.realestatereservationapp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.janicaleksa.realestatereservationapp.constants.ControllerLayerConstants;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserDeactivateFormDTO;
+import com.janicaleksa.realestatereservationapp.exceptions.UserException;
 import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequestDTO;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
 
@@ -26,7 +28,11 @@ public class UserController {
 	
 	@PostMapping(value = ControllerLayerConstants.API.User.REGISTRATION_URL)
 	public void registerUser(@RequestBody UserDTO userDTO) {
-		getUserFacade().registerUser(userDTO);
+		try {
+			getUserFacade().registerUser(userDTO);
+		} catch (UserException ue) {
+			throw new UserException(ue.getMessage());
+		}
 	}
 	
 	@PostMapping(value = ControllerLayerConstants.API.User.AUTHENTICATE_URL)

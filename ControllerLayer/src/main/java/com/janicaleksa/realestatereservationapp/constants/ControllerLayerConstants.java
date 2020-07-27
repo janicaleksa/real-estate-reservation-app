@@ -30,13 +30,20 @@ public interface ControllerLayerConstants {
 		
 		interface Reservation {
 			
-			static final String ADVERTISEMENT_URL = "/reservation";
+			static final String RESERVATION_URL = "/reservation";
 			
-			static final String GET_SINGLE = API_URL + ADVERTISEMENT_URL + "/{id}";
-			static final String GET_ALL = API_URL + ADVERTISEMENT_URL;
-			static final String CREATE_URL = API_URL + ADVERTISEMENT_URL;
-			static final String UPDATE_URL = API_URL + ADVERTISEMENT_URL + "/{id}";
-			static final String DELETE_URL = API_URL + ADVERTISEMENT_URL + "/{id}";
+			static final String GET_SINGLE = API_URL + RESERVATION_URL + "/{id}";
+			static final String GET_ALL = API_URL + RESERVATION_URL;
+			static final String CREATE_URL = API_URL + RESERVATION_URL;
+			static final String UPDATE_URL = API_URL + RESERVATION_URL + "/{id}";
+			static final String DELETE_URL = API_URL + RESERVATION_URL + "/{id}";
+		}
+		
+		interface Role {
+			
+			static final String ROLE_URL = "/role";
+			
+			static final String GET_ALL = API_URL + ROLE_URL;
 		}
 	}
 	
