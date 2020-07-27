@@ -8,6 +8,7 @@ import com.janicaleksa.realestatereservationapp.domain.JWTToken;
 import com.janicaleksa.realestatereservationapp.domain.User;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserDeactivateFormDTO;
+import com.janicaleksa.realestatereservationapp.exceptions.UserException;
 import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequestDTO;
 import com.janicaleksa.realestatereservationapp.dto.AuthenticationResponseDTO;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
@@ -28,8 +29,12 @@ public class UserFacadeImpl implements UserFacade{
 		this.jwtService = jwtService;
 	}
 	
-	public void registerUser(UserDTO userDTO) {
-		getUserService().saveUser(UserMapper.INSTANCE.userDTOToUser(userDTO));
+	public void registerUser(UserDTO userDTO) throws UserException {
+		try {
+			getUserService().saveUser(UserMapper.INSTANCE.userDTOToUser(userDTO));
+		} catch (UserException ue) {
+			throw ue;
+		}
 	}
 	
 	public AuthenticationResponseDTO authenticateUser(AuthenticationRequestDTO authenticationRequest) {
@@ -45,7 +50,7 @@ public class UserFacadeImpl implements UserFacade{
 	}
 	
 	public void updateUser(UserDTO userDTO) {
-		getUserService().saveUser(UserMapper.INSTANCE.userDTOToUser(userDTO));
+		getUserService().updateUser(UserMapper.INSTANCE.userDTOToUser(userDTO));
 	}
 	
 	public void deactivateUser(UserDeactivateFormDTO userDeactivateForm) {
