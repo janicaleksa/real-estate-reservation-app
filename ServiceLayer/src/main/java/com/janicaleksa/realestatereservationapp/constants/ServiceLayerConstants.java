@@ -13,4 +13,9 @@ public interface ServiceLayerConstants {
 		static final Date CURRENT_DATE = new Date();
 	}
 	
+	interface Error {
+		
+		static final String INTERNAL_ERROR = "Internal error!";
+	}
+	
 }

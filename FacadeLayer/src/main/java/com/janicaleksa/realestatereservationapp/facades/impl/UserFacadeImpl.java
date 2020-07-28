@@ -9,10 +9,8 @@ import com.janicaleksa.realestatereservationapp.domain.User;
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserDeactivateFormDTO;
 import com.janicaleksa.realestatereservationapp.exceptions.UserException;
-import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequestDTO;
 import com.janicaleksa.realestatereservationapp.dto.AuthenticationResponseDTO;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
-import com.janicaleksa.realestatereservationapp.mappers.AuthenticationRequestMapper;
 import com.janicaleksa.realestatereservationapp.mappers.UserMapper;
 import com.janicaleksa.realestatereservationapp.service.JWTService;
 import com.janicaleksa.realestatereservationapp.service.UserService;
@@ -22,6 +20,7 @@ public class UserFacadeImpl implements UserFacade{
 
 	private final UserService userService;
 	private final JWTService jwtService;
+	
 	
 	@Autowired
 	public UserFacadeImpl(UserService userService, JWTService jwtService) {
@@ -34,19 +33,35 @@ public class UserFacadeImpl implements UserFacade{
 			getUserService().saveUser(UserMapper.INSTANCE.userDTOToUser(userDTO));
 		} catch (UserException ue) {
 			throw ue;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UserException(ServiceLayerConstants.Error.INTERNAL_ERROR);
 		}
 	}
 	
-	public AuthenticationResponseDTO authenticateUser(AuthenticationRequestDTO authenticationRequest) {
-		User user = AuthenticationRequestMapper.INSTANCE.authenticationRequestDTOToUser(authenticationRequest);
-		getUserService().authenticateUser(user);
-		return new AuthenticationResponseDTO(getJwtService().generateToken(new JWTToken(getUserService().loadUserByUsername(user.getUsername()), 
-				ServiceLayerConstants.JWTToken.CURRENT_DATE_TIME, ServiceLayerConstants.JWTToken.CURRENT_DATE_TIME.plusHours(ServiceLayerConstants.JWTToken.EXPIRING_HOURS))));
+	public AuthenticationResponseDTO authenticateUser(String username, String password) throws UserException {
+		try {
+			getUserService().authenticateUser(username, password);
+			return new AuthenticationResponseDTO(getJwtService().generateToken(new JWTToken(getUserService().loadUserByUsername(username), 
+					ServiceLayerConstants.JWTToken.CURRENT_DATE_TIME, ServiceLayerConstants.JWTToken.CURRENT_DATE_TIME.plusHours(ServiceLayerConstants.JWTToken.EXPIRING_HOURS))));
+		} catch (UserException ue) {
+			throw ue;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UserException(ServiceLayerConstants.Error.INTERNAL_ERROR);
+		}
 	}
 	
-	public UserDTO loginUser(AuthenticationRequestDTO authenticationRequestDTO) {
-		User newUser = getUserService().loginUser(AuthenticationRequestMapper.INSTANCE.authenticationRequestDTOToUser(authenticationRequestDTO));
-		return UserMapper.INSTANCE.userToUserDTO(newUser);
+	public UserDTO loginUser(String username) throws UserException {
+		try {
+			User newUser = getUserService().loginUser(username);
+			return UserMapper.INSTANCE.userToUserDTO(newUser);
+		} catch (UserException ue) {
+			throw ue;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UserException(ServiceLayerConstants.Error.INTERNAL_ERROR);
+		}
 	}
 	
 	public void updateUser(UserDTO userDTO) {

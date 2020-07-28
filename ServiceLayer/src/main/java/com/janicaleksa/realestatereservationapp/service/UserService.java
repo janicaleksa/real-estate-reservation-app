@@ -7,11 +7,11 @@ public interface UserService {
 
 	void saveUser(User user) throws UserException;
 	
-	void authenticateUser(User user);
+	void authenticateUser(String username, String password) throws UserException;
 	
-	User loadUserByUsername(String username) throws UserException;
+	User loadUserByUsername(String username) throws Exception;
 	
-	User loginUser(User user);
+	User loginUser(String username) throws UserException;
 	
 	void deleteUser(User user);
 

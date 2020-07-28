@@ -36,21 +36,24 @@ public class JWTRequestFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		
-		String jwtTokenValue = request.getHeader(ControllerLayerConstants.JWTToken.AuthorizationHeader);	
-		
-		if(!StringUtils.isEmpty(jwtTokenValue)) {
-			String username = getJwtService().extractUsername(jwtTokenValue);
+		try {
+			String jwtTokenValue = request.getHeader(ControllerLayerConstants.JWTToken.AuthorizationHeader);	
 			
-			if(!StringUtils.isEmpty(username) && Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {
-				User user = getUserService().loadUserByUsername(username);
+			if(!StringUtils.isEmpty(jwtTokenValue)) {
+				String username = getJwtService().extractUsername(jwtTokenValue);
 				
-				if(getJwtService().validateToken(jwtTokenValue, user)) {
-					UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-					usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-					SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+				if(!StringUtils.isEmpty(username) && Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {
+					User user = getUserService().loadUserByUsername(username);
+					
+					if(getJwtService().validateToken(jwtTokenValue, user)) {
+						UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+						usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+						SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+					}
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		filterChain.doFilter(request, response);
