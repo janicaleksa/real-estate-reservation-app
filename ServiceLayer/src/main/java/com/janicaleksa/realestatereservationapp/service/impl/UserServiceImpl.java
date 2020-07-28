@@ -2,6 +2,7 @@ package com.janicaleksa.realestatereservationapp.service.impl;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -45,23 +46,44 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void authenticateUser(User user) {
-		getUserSecurityService().authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
-	}
-	
-	@Override
-	public User loadUserByUsername(String username) throws UserException {
+	public void authenticateUser(String username, String password) throws UserException {
 		try {
-			return (User) getUserSecurityService().loadUserByUsername(username);
+			Optional<UserAccount> userAccount = getUserRepository().findByUsername(username);
+			if(!userAccount.isPresent()) {
+				throw new UserException("User with username: " + username + " doesn't exist, please register!");
+			}
+			
+			UserAccount user = userAccount.get();
+			if(!StringUtils.equals(user.getPassword(), password)) {
+				throw new UserException("Password is invalid, please try again!");
+			}
+			
+			getUserSecurityService().authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+		} catch (UserException ue) {
+			throw ue;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new UserException("Could not find user by username!");
+			throw new UserException("Couldn't authenticate user!");
 		}
 	}
 	
 	@Override
-	public User loginUser(User user) {
-		return loadUserByUsername(user.getUsername());
+	public User loadUserByUsername(String username) throws Exception {
+		try {
+			return (User) getUserSecurityService().loadUserByUsername(username);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	@Override
+	public User loginUser(String username) throws UserException {
+		try {
+			return loadUserByUsername(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UserException("Could not login user!");
+		}
 	}
 	
 	@Override

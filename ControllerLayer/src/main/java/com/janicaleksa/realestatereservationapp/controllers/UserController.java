@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +15,6 @@ import com.janicaleksa.realestatereservationapp.constants.ControllerLayerConstan
 import com.janicaleksa.realestatereservationapp.dto.UserDTO;
 import com.janicaleksa.realestatereservationapp.dto.UserDeactivateFormDTO;
 import com.janicaleksa.realestatereservationapp.exceptions.UserException;
-import com.janicaleksa.realestatereservationapp.dto.AuthenticationRequestDTO;
 import com.janicaleksa.realestatereservationapp.facades.UserFacade;
 
 @RestController
@@ -35,14 +36,22 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping(value = ControllerLayerConstants.API.User.AUTHENTICATE_URL)
-	public ResponseEntity<?> authenticateUser(@RequestBody AuthenticationRequestDTO authenticationRequest) {
-		return ResponseEntity.ok(getUserFacade().authenticateUser(authenticationRequest));
+	@GetMapping(value = ControllerLayerConstants.API.User.AUTHENTICATE_URL)
+	public ResponseEntity<?> authenticateUser(@PathVariable String username, @PathVariable String password) {
+		try {
+			return ResponseEntity.ok(getUserFacade().authenticateUser(username, password));
+		} catch (UserException ue) {
+			throw new UserException(ue.getMessage());
+		}
 	}
 	
 	@PostMapping(value = ControllerLayerConstants.API.User.LOGIN_URL)
-	public ResponseEntity<?> loginUser(@RequestBody AuthenticationRequestDTO loginRequest) {
-		return ResponseEntity.ok(getUserFacade().loginUser(loginRequest));
+	public ResponseEntity<?> loginUser(@PathVariable String username) {
+		try {
+			return ResponseEntity.ok(getUserFacade().loginUser(username));
+		} catch (UserException ue) {
+			throw new UserException(ue.getMessage());
+		}
 	}
 	
 	@PutMapping(value = ControllerLayerConstants.API.User.UPDATE_URL)

@@ -11,8 +11,8 @@ public interface ControllerLayerConstants {
 			static final String USER_URL = "/users";
 			
 			static final String REGISTRATION_URL = API_URL + USER_URL + "/registration";
-			static final String AUTHENTICATE_URL = API_URL + USER_URL + "/authenticate";
-			static final String LOGIN_URL = API_URL + USER_URL + "/login";
+			static final String AUTHENTICATE_URL = API_URL + USER_URL + "/authenticate/{username}&{password}";
+			static final String LOGIN_URL = API_URL + USER_URL + "/login/{username}";
 			static final String UPDATE_URL = API_URL + USER_URL + "/{username}";
 			static final String DELETE_URL = API_URL + USER_URL + "/{username}";
 		}
