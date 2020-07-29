@@ -10,5 +10,7 @@ public interface JWTService {
 	String extractUsername(String jwtTokenValue);
 	
 	Boolean validateToken(String jwtTokenValue, User user);
+
+	String parseHeader(String header);
 	
 }

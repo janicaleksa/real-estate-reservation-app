@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.json.*;
 
 import com.janicaleksa.realestatereservationapp.constants.ServiceLayerConstants;
 import com.janicaleksa.realestatereservationapp.domain.JWTToken;
@@ -48,6 +49,12 @@ public class JWTServiceImpl implements JWTService {
 	@Override
 	public Boolean validateToken(String jwtTokenValue, User user) {
 		return Objects.isNull(user) || StringUtils.isEmpty(jwtTokenValue) ? false : (StringUtils.equals(extractUsername(jwtTokenValue), user.getUsername()) && !isTokenExpired(jwtTokenValue));
+	}
+
+	@Override
+	public String parseHeader(String header) {
+		JSONObject jsonObject = new JSONObject(header);
+		return jsonObject.getString("token");
 	}
 	
 

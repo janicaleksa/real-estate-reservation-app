@@ -9,7 +9,7 @@ public interface UserFacade {
 
 	void registerUser(UserDTO userForm) throws UserException;
 	
-	UserDTO loginUser(String username) throws UserException;
+	UserDTO loginUser(String username, String password) throws UserException;
 	
 	void updateUser(UserDTO userForm);
 	

@@ -45,10 +45,10 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping(value = ControllerLayerConstants.API.User.LOGIN_URL)
-	public ResponseEntity<?> loginUser(@PathVariable String username) {
+	@GetMapping(value = ControllerLayerConstants.API.User.LOGIN_URL)
+	public ResponseEntity<?> loginUser(@PathVariable String username, @PathVariable String password) {
 		try {
-			return ResponseEntity.ok(getUserFacade().loginUser(username));
+			return ResponseEntity.ok(getUserFacade().loginUser(username, password));
 		} catch (UserException ue) {
 			throw new UserException(ue.getMessage());
 		}

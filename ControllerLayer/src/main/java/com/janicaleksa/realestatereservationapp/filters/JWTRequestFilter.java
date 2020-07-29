@@ -37,9 +37,10 @@ public class JWTRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		try {
-			String jwtTokenValue = request.getHeader(ControllerLayerConstants.JWTToken.AuthorizationHeader);	
-			
-			if(!StringUtils.isEmpty(jwtTokenValue)) {
+			String header = request.getHeader(ControllerLayerConstants.JWTToken.AuthorizationHeader);	
+
+			if(!StringUtils.isEmpty(header)) {
+				String jwtTokenValue = getJwtService().parseHeader(header);
 				String username = getJwtService().extractUsername(jwtTokenValue);
 				
 				if(!StringUtils.isEmpty(username) && Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {

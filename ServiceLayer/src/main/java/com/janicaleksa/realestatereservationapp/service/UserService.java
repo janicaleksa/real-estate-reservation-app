@@ -11,7 +11,7 @@ public interface UserService {
 	
 	User loadUserByUsername(String username) throws Exception;
 	
-	User loginUser(String username) throws UserException;
+	User loginUser(String username, String password) throws UserException;
 	
 	void deleteUser(User user);
 

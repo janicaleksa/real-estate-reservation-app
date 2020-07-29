@@ -52,9 +52,9 @@ public class UserFacadeImpl implements UserFacade{
 		}
 	}
 	
-	public UserDTO loginUser(String username) throws UserException {
+	public UserDTO loginUser(String username, String password) throws UserException {
 		try {
-			User newUser = getUserService().loginUser(username);
+			User newUser = getUserService().loginUser(username, password);
 			return UserMapper.INSTANCE.userToUserDTO(newUser);
 		} catch (UserException ue) {
 			throw ue;

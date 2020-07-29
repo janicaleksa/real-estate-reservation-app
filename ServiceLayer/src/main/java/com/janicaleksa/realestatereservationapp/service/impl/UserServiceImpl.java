@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			Optional<UserAccount> userAccount = getUserRepository().findByUsername(user.getUsername());
 			if(userAccount.isPresent()) {
-				throw new UserException("User with username: " + user.getUsername() + " already exist!");
+				throw new UserException("User with username: '" + user.getUsername() + "' already exist!");
 			}
 			
 			getUserRepository().save(UserAccountMapper.INSTANCE.userToUserAccount(user));
@@ -48,15 +48,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void authenticateUser(String username, String password) throws UserException {
 		try {
-			Optional<UserAccount> userAccount = getUserRepository().findByUsername(username);
-			if(!userAccount.isPresent()) {
-				throw new UserException("User with username: " + username + " doesn't exist, please register!");
-			}
-			
+			Optional<UserAccount> userAccount = getUserAccount(username);
 			UserAccount user = userAccount.get();
-			if(!StringUtils.equals(user.getPassword(), password)) {
-				throw new UserException("Password is invalid, please try again!");
-			}
+			
+			validateUserPassword(password, user.getPassword());
 			
 			getUserSecurityService().authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 		} catch (UserException ue) {
@@ -77,13 +72,32 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User loginUser(String username) throws UserException {
+	public User loginUser(String username, String password) throws UserException {
 		try {
+			Optional<UserAccount> userAccount = getUserAccount(username);
+			UserAccount user = userAccount.get();
+			
+			validateUserPassword(password, user.getPassword());
+			
 			return loadUserByUsername(username);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new UserException("Could not login user!");
 		}
+	}
+
+	private void validateUserPassword(String password, String userPassword) {
+		if(!StringUtils.equals(password, userPassword)) {
+			throw new UserException("Password is invalid, please try again!");
+		}
+	}
+
+	private Optional<UserAccount> getUserAccount(String username) {
+		Optional<UserAccount> userAccount = getUserRepository().findByUsername(username);
+		if(!userAccount.isPresent()) {
+			throw new UserException("User with username: '" + username + "' doesn't exist, please register!");
+		}
+		return userAccount;
 	}
 	
 	@Override
